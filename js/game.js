@@ -1,5 +1,5 @@
-var imageAssets = ["images/BombermanDojo.png"];
-var scene, gameLoop, persons = [], input;
+var imageAssets = ["images/BombermanDojo.png", "images/tileset.png", "images/char_gold.png", "images/char_silver.png"];
+var scene, gameLoop, objects = [], input;
 
 window.onload = function() {
     scene = sjs.Scene({
@@ -7,8 +7,10 @@ window.onload = function() {
         h: 400
     });
 
-    var ticker = scene.Ticker(gameLoop);
-    input = scene.Input();
+    var ticker = scene.Ticker(gameLoop, {
+        tickDuration: 32
+    });
+    input = scene.Input(); 
 
     scene.loadImages(imageAssets, function() {
         var background = scene.Layer('background', {
@@ -19,8 +21,9 @@ window.onload = function() {
             useCanvas: 'true'
         });
 
-        a = new Person(background, 100, 200);
-        b = new Player(background, 150, 230);
+        a = new Person(foreground, 100, 200);
+        b = new Player(foreground, 150, 230);
+        w = new Wall(background, 50, 230);
 
         ticker.run();
 
@@ -29,8 +32,14 @@ window.onload = function() {
 
 function gameLoop() {
 
-    for (var i = 0; i < persons.length; i++)
-        persons[i].update();
+    for (var i = 0; i < objects.length; i++)
+        objects[i].update();
+
+}
+
+function canMoveTo(object, newX, newY) {
+
+    return true;
 
 }
 
@@ -38,12 +47,16 @@ function Person(layer, x, y) {
     var self = this;
     var options = {
         layer: layer,
-        xoffset: 230,
         x: x,
         y: y,
-        size: [20, 36]
+        size: [32, 42],
+        xscale: 1,
+        yscale: 1,
+        xoffset: 4,
+        yoffset: 0,
+        color: 'green'
     };
-    self.sprite = scene.Sprite("images/BombermanDojo.png", options);
+    self.sprite = scene.Sprite("images/char_gold.png", options);
     self.update = function() {
         self.sprite.update();
     };
@@ -52,25 +65,35 @@ function Person(layer, x, y) {
         switch (direction) {
         case "left":
             x = -1;
+            self.sprite.setYOffset(124);
             break;
         case "right":
             x = 1;
+            self.sprite.setYOffset(32+8);
             break;
         case "down":
             y = 1;
+            self.sprite.setYOffset(84);
             break;
         case "up":
             y = -1;
+            self.sprite.setYOffset(0);
             break;
         default:
             x = 0, y = 0;
         break;
         }
-        self.sprite.move(x, y);
-        self.sprite.update();
+
+        x*=10, y*=10;
+
+        if (canMoveTo(self, x, y)) {
+            self.sprite.move(x, y);
+        }
+        self.sprite.update();            
+
     };
     self.update();
-    persons.push(self);
+    objects.push(self);
     return self;
 }
 
@@ -93,5 +116,25 @@ function Player(layer, x, y) {
             self.sprite.update();
         }
     };
+    return self;
+}
+
+function Wall(layer, x, y) {
+    var self = this;
+    self.sprite = scene.Sprite("images/tileset.png",{
+        layer: layer, 
+        x: x,
+        y: y,
+        size: [32, 32],
+        color: 'red',
+        xoffset: 4*32,
+        yoffset: (6*32)+10
+    });
+    self.update = function() {
+        self.sprite.update();
+    };
+    self.sprite.setBackgroundRepeat("repeat");
+    objects.push(self);
+    self.update();
     return self;
 }
