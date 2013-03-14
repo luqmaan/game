@@ -1,0 +1,358 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"on",
+				"onImageLoad"
+			],
+			[
+				"backgrou",
+				"background-color"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "index.html",
+			"settings":
+			{
+				"buffer_size": 276,
+				"line_ending": "Unix",
+				"name": "<!DOCTYPE html>"
+			}
+		},
+		{
+			"file": "css/styles.css",
+			"settings":
+			{
+				"buffer_size": 482,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "js/canvas.js",
+			"settings":
+			{
+				"buffer_size": 502,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 332.0,
+		"selected_items":
+		[
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Disable Package"
+			],
+			[
+				"pac",
+				"Package Control: Install Package"
+			],
+			[
+				"git",
+				"Package Control: Install Package"
+			],
+			[
+				"packa",
+				"Package Control: Install Package"
+			],
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
+			[
+				"package",
+				"Package Control: Install Package"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"package in",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 435.0
+	},
+	"console":
+	{
+		"height": 139.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/radicalcakes/bombercat/js/test.js",
+		"/home/radicalcakes/hillathon/_site/assets/css/cookies.css",
+		"/home/radicalcakes/hillathon/_layouts/index.html",
+		"/home/radicalcakes/.cache/.fr-vqz6KK/colorbox-master/example3/index.html",
+		"/home/radicalcakes/hillathon/_layouts/default.bk",
+		"/home/radicalcakes/hillathon/assets/js/modernizr.min.js",
+		"/home/radicalcakes/hillathon/_layouts/default.html",
+		"/home/radicalcakes/hillathon/index.html",
+		"/home/radicalcakes/hillathon/config.rb",
+		"/home/radicalcakes/hillathon/donkey_bas/index.html",
+		"/home/radicalcakes/hillathon/assets/config.rb",
+		"/home/radicalcakes/hillathon/assets/js/modernizr.js",
+		"/home/radicalcakes/hillathon/_site/index.html",
+		"/home/radicalcakes/hillathon/assets/js/crafty.js",
+		"/home/radicalcakes/hillathon/assets/css/donkey.css",
+		"/home/radicalcakes/hillathon/_layouts/donkey_bas.html",
+		"/home/radicalcakes/hillathon/assets/scss/donkey.scss",
+		"/home/radicalcakes/hillathon/Procfile.dev",
+		"/home/radicalcakes/hillathon/_config.yml",
+		"/home/radicalcakes/hillathon/README.md",
+		"/home/radicalcakes/hillathon/Gemfile",
+		"/home/radicalcakes/hillathon/.gitignore",
+		"/home/radicalcakes/hillathon/config.rb\\",
+		"/home/radicalcakes/hillathon/index.bak",
+		"/home/radicalcakes/hillathon/index.jekyll",
+		"/home/radicalcakes/hillathon/app/donkey_bas/index.html",
+		"/home/radicalcakes/hillathon/app/_layouts/default.html",
+		"/home/radicalcakes/hillathon/app/index.html",
+		"/home/radicalcakes/hillathon/sftp-config.json",
+		"/home/radicalcakes/.config/sublime-text-2/Packages/User/sftp_servers/udderweb",
+		"/home/radicalcakes/.config/sublime-text-2/Packages/User/sftp_servers/default",
+		"/tmp/rsub-AEboPz/radicalcakes-HP-G62-Notebook-PC:.profile",
+		"/home/radicalcakes/.config/sublime-text-2/Packages/SideBarEnhancements/messages/11.13.2012.1305.0.txt",
+		"/home/radicalcakes/.config/sublime-text-2/Packages/User/pep8_autoformat.sublime-settings",
+		"/home/radicalcakes/.config/sublime-text-2/Packages/User/Preferences.sublime-settings",
+		"/home/radicalcakes/.config/sublime-text-2/Packages/User/Package Control.sublime-settings"
+	],
+	"find":
+	{
+		"height": 37.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"sign",
+			"h2"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "index.html",
+					"settings":
+					{
+						"buffer_size": 276,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								276,
+								276
+							]
+						],
+						"settings":
+						{
+							"auto_name": "<!DOCTYPE html>",
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "css/styles.css",
+					"settings":
+					{
+						"buffer_size": 482,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								473,
+								473
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/CSS/CSS.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "js/canvas.js",
+					"settings":
+					{
+						"buffer_size": 502,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								502,
+								502
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		},
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 36.0
+	},
+	"input":
+	{
+		"height": 35.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.801579608014,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 114.0
+	},
+	"output.sftp":
+	{
+		"height": 114.0
+	},
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 179.0,
+	"status_bar_visible": true
+}
