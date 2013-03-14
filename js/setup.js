@@ -47,8 +47,8 @@ var Canvas = {
 	canvas: null,
 	ctx: null,
 
-	init: function(){
-		Canvas.RATIO = Canvas.WIDTH/Canvas.HEIGHT;
+	init: function() {
+		Canvas.RATIO = Canvas.WIDTH / Canvas.HEIGHT;
 		Canvas.currWidth = Canvas.WIDTH;
 		Canvas.currHeight = Canvas.HEIGHT;
 		Canvas.canvas = document.getElementById("tablet");
@@ -56,6 +56,7 @@ var Canvas = {
 		Canvas.canvas.height = Canvas.HEIGHT;
 		Canvas.ctx = Canvas.canvas.getContext("2d");
 	}
-	
+
 };
+window.Canvas = Canvas;
 window.addEventListener('load', Canvas.init, false);
