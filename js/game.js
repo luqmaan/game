@@ -26,16 +26,22 @@ window.onload = function() {
         });
 
         // npc = new Person(foreground, 0, 0);
-        user = new Player(foreground, 3, 2);
-        new Wall(foreground, 5, 5);
-        new Wall(foreground, 6, 5);
-        new Wall(foreground, 5, 4);
-        new Wall(foreground, 8, 1);
-        new Wall(foreground, 4, 2);
-        new Wall(foreground, 2, 3);
-        new Wall(foreground, 1, 4);
-        new Wall(foreground, 1, 5);
-         // b = new Bomb(foreground, 1,0, 2);
+        var user = new Player(foreground, 3, 2);
+        var w;
+        w = new Wall(foreground, 5, 5);
+        w = new Wall(foreground, 6, 5);
+        w = new Wall(foreground, 5, 4);
+        w = new Wall(foreground, 8, 1);
+        w = new Wall(foreground, 4, 2);
+        w = new Wall(foreground, 4, 3);
+        w = new Wall(foreground, 2, 2);
+        w = new Wall(foreground, 4, 1);
+        w = new Wall(foreground, 3, 1);
+        w = new Wall(foreground, 3, 3);
+        w = new Wall(foreground, 2, 3);
+        w = new Wall(foreground, 1, 4);
+        w = new Wall(foreground, 1, 5);
+        var b = new Bomb(foreground, 2, 1, 5);
 
         ticker.run();
 
@@ -44,9 +50,9 @@ window.onload = function() {
     // populate 2d obstacles array with zeros
     var row = [];
     for (var i = 0; i < gameWidth; i++)
-    row[i] = 0;
+        row[i] = 0;
     for (i = 0; i < gameHeight; i++)
-    obstacles[i] = row.slice(0);
+        obstacles[i] = row.slice(0);
 
 };
 
@@ -65,7 +71,7 @@ function canMoveTo(object, xDelta, yDelta) {
 
     if (newX >= 0 && newY >= 0 && newX < gameWidth && newY < gameHeight) {
         console.log("obstacles[" + newY + "][" + newX + "] = " + obstacles[newY][newX]);
-        if (obstacles[newY][newX] === 0 || obstacles[newY][newX].type == "person")
+        if (obstacles[newY][newX] === 0 || obstacles[newY][newX].type === "person")
             return true;
     }
     return false;
@@ -111,24 +117,24 @@ function Person(layer, xGrid, yGrid) {
             y = 0;
         self.sprite.setOpacity(1);
         switch (direction) {
-            case "up":
-                y = -1;
-                self.sprite.setYOffset(4);
-                break;
-            case "down":
-                y = 1;
-                self.sprite.setYOffset(84 + 4);
-                break;
-            case "left":
-                x = -1;
-                self.sprite.setYOffset(124 + 7);
-                break;
-            case "right":
-                x = 1;
-                self.sprite.setYOffset(32 + 14);
-                break;
-            default:
-                break;
+        case "up":
+            y = -1;
+            self.sprite.setYOffset(4);
+            break;
+        case "down":
+            y = 1;
+            self.sprite.setYOffset(84 + 4);
+            break;
+        case "left":
+            x = -1;
+            self.sprite.setYOffset(124 + 7);
+            break;
+        case "right":
+            x = 1;
+            self.sprite.setYOffset(32 + 14);
+            break;
+        default:
+            break;
         }
 
         if (canMoveTo(self, x, y)) {
@@ -137,7 +143,8 @@ function Person(layer, xGrid, yGrid) {
             self.yGrid += y;
             self.updateObstaclePosition();
             console.log("self.xGrid " + self.xGrid + " self.yGrid " + self.yGrid);
-            x *= 32, y *= 32;   
+            x *= 32;
+            y *= 32;   
             self.sprite.move(x, y);
         }
         self.sprite.update();
@@ -151,6 +158,9 @@ function Person(layer, xGrid, yGrid) {
 function Player(layer, xGrid, yGrid) {
     var self = new Person(layer, xGrid, yGrid);
     self.update = function() {
+        if (input.keyboard.space) {
+            var b = new Bomb(layer, self.xGrid, self.yGrid, 2);
+        }
         if (input.keyboard.up) {
             self.move("up");
         } else if (input.keyboard.down) {
@@ -161,9 +171,6 @@ function Player(layer, xGrid, yGrid) {
             self.move("right");
         } else {
             self.sprite.update();
-        }
-        if (input.keyboard.space) {
-            new Bomb(layer, self.xGrid, self.yGrid, 2);
         }
     };
     return self;
@@ -227,50 +234,33 @@ function Bomb(layer, xGrid, yGrid, radius) {
         self.sprite.update();
         self.sprite.setXOffset(iX++ * 66);
         self.sprite.setYOffset(iY * 66);
-        if (steps == 5) {
+        if (steps === 5) {
             iY++;
-            iX = 0;        
+            iX = 0;
         }
-        else if (steps == 9) {
+        else if (steps === 9) {
             self.explode();
         }
         steps++;
     };
-    self.spotsToExplode = function() {
-        var spots = [-1,-1,-1,-1];
-        for (var r = 0; r < self.radius; r++) {
-            var x = object.xGrid;
-            var y = object.yGrid;
-
-            if (y+1<gameHeight)
-                spots.push([x,y+1]);
-            if (y-1>-1)
-                spots.push([x,y-1]);
-            if (x+1<gameWidth)
-                spots.push([x+1,y]);
-            if (x-1>-1)
-                spots.push([x-1,y]);
-        }
-        return spots;
-    };
 
     self.explode = function() {
 
-        new Fire(layer, self.xGrid, self.yGrid, 0);
-
         // How do you simplify this repetition?
-        var r, newval;
-        
+        var r, newVal, f;
+
+        f = new Fire(layer, self.xGrid, self.yGrid, 0);
+
         // up
         for (r = 1; r <= self.radius; r++) {
             // console.log("self.yGrid - r = " + (self.yGrid - r <= 1) )
             newVal = self.yGrid - r;
             if (newVal >= 0) {
-                if (r == self.radius || newVal === 0 || obstacles[newVal][self.xGrid] === 1) {
-                new Fire(layer, self.xGrid, newVal, -4);
-                break;
+                if (r === self.radius || newVal === 0 || obstacles[newVal][self.xGrid] === 1) {
+                    f = new Fire(layer, self.xGrid, newVal, -4);
+                    break;
                 } else {
-                    new Fire(layer, self.xGrid, newVal, -3);
+                    f = new Fire(layer, self.xGrid, newVal, -3);
                 }
             }
         }
@@ -278,11 +268,11 @@ function Bomb(layer, xGrid, yGrid, radius) {
         for (r = 1; r <= self.radius; r++) {
             newVal = self.yGrid + r;
             if (newVal < gameHeight) {
-                if (r == self.radius || newVal === gameHeight-1 || obstacles[newVal][self.xGrid] === 1) {
-                    new Fire(layer, self.xGrid, newVal, 4);
+                if (r === self.radius || newVal === gameHeight-1 || obstacles[newVal][self.xGrid] === 1) {
+                    f = new Fire(layer, self.xGrid, newVal, 4);
                     break;
                 } else {
-                    new Fire(layer, self.xGrid, newVal, 3);
+                    f = new Fire(layer, self.xGrid, newVal, 3);
                 }
             }
         }
@@ -290,11 +280,11 @@ function Bomb(layer, xGrid, yGrid, radius) {
         for (r = 1; r <= self.radius; r++) {
             newVal = self.xGrid - r;
             if (newVal >= 0) {
-                if (r == self.radius || newVal === 1 || obstacles[self.yGrid][newVal] === 1) {
-                    new Fire(layer, newVal, self.yGrid, -2);
+                if (r === self.radius || newVal === 1 || obstacles[self.yGrid][newVal] === 1) {
+                    f = new Fire(layer, newVal, self.yGrid, -2);
                     break;
                 } else {
-                    new Fire(layer, newVal, self.yGrid, -1);
+                    f = new Fire(layer, newVal, self.yGrid, -1);
                 }
             }
         }
@@ -302,11 +292,11 @@ function Bomb(layer, xGrid, yGrid, radius) {
         for (r = 1; r <= self.radius; r++) {
             newVal = self.xGrid + r;
             if (newVal < gameWidth) {
-                if (r == self.radius || newVal === gameWidth-1 || obstacles[self.yGrid][newVal] === 1) {
-                    new Fire(layer, newVal, self.yGrid, 2);
+                if (r === self.radius || newVal === gameWidth-1 || obstacles[self.yGrid][newVal] === 1) {
+                    f = new Fire(layer, newVal, self.yGrid, 2);
                     break;
                 } else {
-                    new Fire(layer, newVal, self.yGrid, 1);
+                    f = new Fire(layer, newVal, self.yGrid, 1);
                 }
             }
         }
@@ -340,11 +330,11 @@ function Fire(layer, xGrid, yGrid, type) {
         type *= -1;
         scale = -1;
     }
-    if (type == 4) {
+    if (type === 4) {
         type = 2;
         angle = 1.570;
     }
-    if (type == 3) {
+    if (type === 3) {
         type = 1;
         angle = 1.570;
     }
@@ -357,7 +347,7 @@ function Fire(layer, xGrid, yGrid, type) {
         "yoffset": 0,
         "angle": angle,
         "xscale": scale,
-        "yscale": scale,
+        "yscale": scale
     });
     console.log(angle);
 
@@ -365,7 +355,7 @@ function Fire(layer, xGrid, yGrid, type) {
     self.createdOn = ticker.currentTick;
     var i = 0;
     self.update = function() {
-        i = i == 1 ? 1 : 0;
+        i = i === 1 ? 1 : 0;
         self.sprite.setYOffset(i++ * 32);
         if (ticker.currentTick - self.createdOn >= self.lifetime)
             self.destroy();
