@@ -1,10 +1,7 @@
 var imageAssets = ["images/explosion.png", "images/tileset.png", "images/char_gold.png", "images/char_silver.png", "images/atlas.png"];
-var scene, gameLoop, objects = {}, ticker, input, grid;
+var scene, gameLoop, objects = {}, ticker, input, grid, socket, remotePlayers, localPlayer;
 var gameWidth = 15,
     gameHeight = 10;
-var remotePlayers,
-    socket,
-    localPlayer;
 
 
 window.onload = function() {
@@ -18,8 +15,8 @@ window.onload = function() {
         tickDuration: 100
     });
     input = scene.Input();
+    socket = io.connect("http://trbotime.udderweb.com", {port: 8000, transports: ["websocket"]});
     setEventHandlers();
-    socket = io.connect("http://localhost", {port: 8000, transports: ["websocket"]});
     scene.loadImages(imageAssets, function() {
 
         var background = scene.Layer('background', {
