@@ -1,7 +1,6 @@
 *.ogg
-<<<<<<< HEAD
 *.sublime*
-=======
 node_modules
 node_modules/*
->>>>>>> thien
+server/node_modules
+server/node_modules/*
