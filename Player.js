@@ -80,7 +80,7 @@ function Person(layer, xGrid, yGrid) {
     return self;
 }
 
-var Player = (layer, xGrid, yGrid) {
+function Player(layer, xGrid, yGrid) {
     var self = new Person(layer, xGrid, yGrid);
     self.update = function() {
         if (input.keyboard.space) {
@@ -99,10 +99,10 @@ var Player = (layer, xGrid, yGrid) {
         }
     };
     return {
-    	var id:self.id,
-    	var getX: self.getX(),
-    	var getY: self.getY()
-    }; 
+    	 id : self.id,
+    	 getX: self.getX(),
+    	 getY: self.getY()
+    } 
 }
 
 exports.Player = Player;

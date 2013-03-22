@@ -18,6 +18,7 @@ window.onload = function() {
         tickDuration: 100
     });
     input = scene.Input();
+    setEventHandlers();
     socket = io.connect("http://localhost", {port: 8000, transports: ["websocket"]});
     scene.loadImages(imageAssets, function() {
 
@@ -64,6 +65,34 @@ function gameLoop() {
             objects[i].update();
 
 }
+
+var setEventHandlers = function(){
+    socket.on("connect", onSocketConnected);
+    socket.on("disconnect", onSocketDisconnect);
+    socket.on("new player", onNewPlayer);
+    socket.on("move player", onMovePlayer);
+    socket.on("remove player", onRemovePlayer);    
+}
+
+function onSocketConnected() {
+    console.log("Connected to socket server");
+};
+
+function onSocketDisconnect() {
+    console.log("Disconnected from socket server");
+};
+
+function onNewPlayer(data) {
+    console.log("New player connected: "+data.id);
+};
+
+function onMovePlayer(data) {
+
+};
+
+function onRemovePlayer(data) {
+
+};
 
 function Grid() {
 
