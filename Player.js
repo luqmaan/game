@@ -1,4 +1,114 @@
-//should modularize these, but i'm lazy
+//serve the grid/foreground
+
+/*function Grid() {
+
+    Array.prototype.clone = function() {
+        var arr = this.slice(0);
+        for( var i = 0; i < this.length; i++ ) {
+            if( this[i].clone ) {
+                //recursion
+                arr[i] = this[i].clone();
+            }
+        }
+        return arr;
+    };
+
+    // add contains function
+    Array.prototype.contains = function(type) {
+        var t = Object(this);
+        for (var i = 0; i < t.length; t++) {
+            if (i in t) {
+                if (t[i].type === type)
+                    return true;
+            }
+        }
+        return false;
+    };
+
+    // add filter function
+    if (!Array.prototype.filter) {
+        Array.prototype.filter = function(fun , thisp  ) {
+            "use strict";
+
+            if (this === null) throw new TypeError();
+
+            var t = Object(this);
+            var len = t.length >>> 0;
+            if (typeof fun !== "function") throw new TypeError();
+
+            var res = [];
+            var thisp = arguments[1];
+            for (var i = 0; i < len; i++) {
+                if (i in t) {
+    };
+
+    self.add = function(object) {
+        if (self.canMoveTo(object, object.xGrid, object.yGrid)) {
+            grid[object.yGrid][object.xGrid].push({
+                type: object.type,
+                hash: object.hash
+            });
+        }
+        else {
+            console.error("Cannot add " + object.type + " to ("+object.xGrid+","+object.yGrid+")");
+        }
+    };
+
+    self.remove = function(object) {
+        grid[object.yGrid][object.xGrid] = grid[object.yGrid][object.xGrid].filter(function (element, index, array) {
+            return element.hash !== object.hash;
+        });
+    };
+
+    self.moveTo = function(object, x, y) {
+        if (self.canMoveTo(object, x, y)) {
+            self.remove(object);
+            object.xGrid = newX;
+            object.yGrid = newY;
+            grid[object.yGrid][object.xGrid].push({
+                type: object.type,
+                hash: object.hash
+            });
+            return true;
+        }
+        else
+            return false;
+    };
+
+    self.canMoveTo = function(object, x, y) {
+        if (x < 0 || y < 0 || x >= gameWidth || y >= gameHeight) {
+            return false;
+        }
+        else if (grid[y][x].contains("bomb") || grid[y][x].contains("wall")) {
+            return false;
+        }
+        return true;
+    };
+
+    self.dump = function() {
+
+        for (var i = 0; i < self.length; i++) {
+            var r = i + " | ";
+            for (var j = 0; j < self[i].length; j++) {
+                if (self[i][j].length > 0) {
+                    for (var k = 0; k < self[i][j].length; k++) {
+                        r += " "+j+"="+self[i][j][k].type;
+                    }
+                }
+                else {
+                    r += " "+j+"=_";
+                }
+            }
+            console.log(r);
+        }
+
+    };
+
+    return self;
+
+}*/
+
+
 function Entity(xGrid, yGrid, type) {
     console.log("new " + type + " at (" + xGrid + "," + yGrid + ")");
     var self = this;
@@ -98,11 +208,18 @@ function Player(layer, xGrid, yGrid) {
             self.sprite.update();
         }
     };
-    return {
-    	 id : self.id,
-    	 getX: self.getX(),
-    	 getY: self.getY()
-    } 
+    return self;
 }
+
+
+/*function hashify() {
+    // needs to be improved, sometimes tiles disappear due to collisions
+    return Math.ceil(Date.now() + Math.random() * 1000);
+}*/
+
+/*function unhash(hash) {
+    return objects[hash];
+}*/
+
 
 exports.Player = Player;

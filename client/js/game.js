@@ -1,11 +1,15 @@
 var imageAssets = ["images/explosion.png", "images/tileset.png", "images/char_gold.png", "images/char_silver.png", "images/atlas.png"];
-var scene, gameLoop, objects = {}, ticker, input, grid, socket, remotePlayers, localPlayer;
+var scene, gameLoop, objects = {}, ticker, input, grid, socket, remotePlayers, user;
 var gameWidth = 15,
     gameHeight = 10;
 
 
+//user.x and grid classes are returning 'undefined' <-- investigate that ah ha!
+//call the .sprite on the object to return the coordinates ie; user.sprite.x
 window.onload = function() {
     remotePlayers = [];
+    socket = io.connect("http://trbotime.udderweb.com", {port: 8000, transports: ["websocket"]});
+    setEventHandlers();
     scene = sjs.Scene({
         w: (gameWidth) * 32,
         h: (gameHeight) * 32
@@ -15,8 +19,6 @@ window.onload = function() {
         tickDuration: 100
     });
     input = scene.Input();
-    socket = io.connect("http://trbotime.udderweb.com", {port: 8000, transports: ["websocket"]});
-    setEventHandlers();
     scene.loadImages(imageAssets, function() {
 
         var background = scene.Layer('background', {
@@ -32,6 +34,7 @@ window.onload = function() {
         // npc = new Person(foreground, 0, 0);
         user = new Player(foreground, 3, 2);
         var w;
+	console.log("xxxx",user.sprite.x);
 
         w = new Wall(foreground, 1, 1);
         w = new Wall(foreground, 5, 5);
@@ -61,25 +64,37 @@ function gameLoop() {
         if (i in objects)
             objects[i].update();
 
+
+    for(var j=0;j < remotePlayers.length; j++){
+ 	remotePlayers[j].update();
+    }
+
 }
 
 var setEventHandlers = function(){
     socket.on("connect", onSocketConnected);
+    console.log("you connected");
     socket.on("disconnect", onSocketDisconnect);
     socket.on("new player", onNewPlayer);
+    console.log("new player has connected");
     socket.on("move player", onMovePlayer);
     socket.on("remove player", onRemovePlayer);    
 }
 
 function onSocketConnected() {
     console.log("Connected to socket server");
+    socket.emit("new player", {x: user.sprite.x, y: user.sprite.y});
+    console.log("player", {x:user.sprite.x, y: user.sprite.y});
 };
 
 function onSocketDisconnect() {
     console.log("Disconnected from socket server");
 };
 
-function onNewPlayer(data) {
+function onNewPlayer(foreground, data) {
+    var newPlayer = new Player(foreground, data.sprite.x, data.sprite.y);
+    newPlayer.id = data.id;
+    remotePlayers.push(newPlayer);
     console.log("New player connected: "+data.id);
 };
 
@@ -264,6 +279,7 @@ function Entity(xGrid, yGrid, type) {
 
 function Person(layer, xGrid, yGrid) {
     var self = new Entity(xGrid, yGrid, "person");
+    var id;
     var options = {
         layer: layer,
         x: xGrid * 32,
@@ -319,6 +335,12 @@ function Person(layer, xGrid, yGrid) {
             self.sprite.move(x, y);
         }
         self.sprite.update();
+    };
+    self.getX = function(){
+	return self.x
+    };
+    self.getY = function(){
+	return self.y
     };
     self.update();
     return self;
