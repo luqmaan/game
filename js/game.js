@@ -1,8 +1,16 @@
 var imageAssets = ["images/explosion.png", "images/tileset.png", "images/char_gold.png", "images/char_silver.png", "images/atlas.png"];
 var scene, gameLoop, objects = {}, ticker, input, grid;
-var gameWidth = 15,
-    gameHeight = 10;
+var gameWidth = Math.ceil(window.innerWidth / 32),
+    gameHeight = Math.ceil(window.innerHeight / 32);
 
+gameHeight /=2, gameWidth/=2;
+
+var d = function() {
+    grid.dump();
+    setTimeout(d, 2000);
+    console.log("=====");
+};
+setTimeout(d, 1000);
 
 window.onload = function() {
     scene = sjs.Scene({
@@ -130,9 +138,9 @@ function Grid() {
                 return element !== entity;
             });
         } else {
-            console.log("called grid["+y+"]["+x+"]");
             var x = arguments[0];
             var y = arguments[1];
+            console.log("called grid["+y+"]["+x+"]");
             if (x >= gameWidth || y >= gameHeight)
                 return [];
             return grid[y][x];
@@ -148,10 +156,15 @@ function Grid() {
         }
         else {
             console.error("Cannot add " + object.type + " to ("+object.xGrid+","+object.yGrid+")");
+            console.log(grid.at(object));
         }
     };
 
     self.remove = function(object) {
+        for (var i=0; i<grid[object.yGrid][object.xGrid]; i++) {
+
+        }
+
         grid[object.yGrid][object.xGrid] = grid[object.yGrid][object.xGrid].filter(function (element, index, array) {
             return element.hash !== object.hash;
         });
@@ -309,8 +322,8 @@ function Player(layer, xGrid, yGrid) {
         } else if (input.keyboard.right) {
             self.move("right");
         } else {
-            self.sprite.update();
         }
+        self.sprite.update();
     };
     return self;
 }
@@ -381,6 +394,9 @@ function Bomb(layer, xGrid, yGrid, radius) {
 
     self.explode = function() {
 
+        self.destroy();
+
+
         // How do you simplify this repetition?
         var r, newVal, f;
 
@@ -435,8 +451,6 @@ function Bomb(layer, xGrid, yGrid, radius) {
                 }
             }
         }
-
-        self.destroy();
 
     };
 
